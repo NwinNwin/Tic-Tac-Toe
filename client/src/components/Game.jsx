@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 
+//TODO:
+// - make a function to check if win
+// - change 1, 2 to X, O
+// - make it look pretty
+
 export default function Game() {
   const [game, setGame] = useState([
     { id: 0, value: 0 },
