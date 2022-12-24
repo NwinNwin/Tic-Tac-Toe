@@ -48,21 +48,27 @@ export default function Game() {
   function checkWin() {
     for (let i = 0; i < 3; i++) {
       //check horizontal
-      if (game[0 + i].value !== "" && game[0 + i].value === game[1 + i].value && game[1 + i].value === game[2 + i].value) {
-        return [true, game[0 + i].value];
+      if (game[0 + 3 * i].value !== "" && game[0 + 3 * i].value === game[1 + 3 * i].value && game[1 + 3 * i].value === game[2 + 3 * i].value) {
+        console.log("1");
+        console.log(`${game[0 + 3 * i].value} ${game[0 + 3 * i].value} ${game[2 + 3 * i].value}`);
+        console.log(`${0 + 3 * i} ${1 + 3 * i} ${2 + 3 * i}`);
+        return [true, game[0 + 3 * i].value];
       }
       //check vertical
       else if (game[0 + i].value !== "" && game[0 + i].value === game[3 + i].value && game[3 + i].value === game[6 + i].value) {
+        console.log("2");
         return [true, game[0 + i].value];
       }
 
       //check diagonal left-right
       else if (game[0].value !== "" && game[0].value === game[4].value && game[4].value === game[8].value) {
+        console.log("3");
         return [true, game[0].value];
       }
 
       //check diagonal right-left
       else if (game[2].value !== "" && game[2].value === game[4].value && game[4].value === game[6].value) {
+        console.log("4");
         return [true, game[2].value];
       }
     }
@@ -79,12 +85,12 @@ export default function Game() {
       }}
     >
       <h1>{ele.value}</h1>
-      {win[0] && <h1>WIN</h1>}
     </div>
   ));
 
   return (
     <div className="game-container">
+      {win[0] && <h1>{win[1]} WIN</h1>}
       <div className="board">{renderBoard}</div>
       <button onClick={restartGame} className="restart-btn">
         Restart
