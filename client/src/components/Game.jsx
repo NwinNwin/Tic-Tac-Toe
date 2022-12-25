@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { checkWin, checkTie } from "../utils";
 
 //TODO:
 // - make a function to check if win
@@ -20,6 +21,7 @@ export default function Game() {
   ]);
   const [turn, setTurn] = useState("X");
   const [win, setWin] = useState([false, ""]);
+  const [tie, setTie] = useState(false);
 
   //[0, 0, 0]
   //[0, 0, 0]
@@ -29,52 +31,22 @@ export default function Game() {
   //O: 2
 
   useEffect(() => {
-    setWin(checkWin());
+    setWin(checkWin(game));
+    setTie(checkTie(game, win));
   }, [turn]);
   //when each box get clicked (set box to that value, switch turn)
+
   function handleBoxClick(id) {
     setGame((prev) => prev.map((box) => (box.id === id && box.value === "" ? { ...box, value: turn } : box)));
     setTurn((prev) => (prev === "X" ? "O" : "X"));
-    // setWin(checkWin());
   }
 
   //restart game
   function restartGame() {
     setGame((prev) => prev.map((box) => ({ ...box, value: "" })));
     setTurn("X");
+    setTie(false);
   }
-
-  //return [ result (true or false), player ("X" or "O")]
-  function checkWin() {
-    for (let i = 0; i < 3; i++) {
-      //check horizontal
-      if (game[0 + 3 * i].value !== "" && game[0 + 3 * i].value === game[1 + 3 * i].value && game[1 + 3 * i].value === game[2 + 3 * i].value) {
-        console.log("1");
-        console.log(`${game[0 + 3 * i].value} ${game[0 + 3 * i].value} ${game[2 + 3 * i].value}`);
-        console.log(`${0 + 3 * i} ${1 + 3 * i} ${2 + 3 * i}`);
-        return [true, game[0 + 3 * i].value];
-      }
-      //check vertical
-      else if (game[0 + i].value !== "" && game[0 + i].value === game[3 + i].value && game[3 + i].value === game[6 + i].value) {
-        console.log("2");
-        return [true, game[0 + i].value];
-      }
-
-      //check diagonal left-right
-      else if (game[0].value !== "" && game[0].value === game[4].value && game[4].value === game[8].value) {
-        console.log("3");
-        return [true, game[0].value];
-      }
-
-      //check diagonal right-left
-      else if (game[2].value !== "" && game[2].value === game[4].value && game[4].value === game[6].value) {
-        console.log("4");
-        return [true, game[2].value];
-      }
-    }
-    return [false, ""];
-  }
-  console.log(win);
 
   //render value in each box
   const renderBoard = game.map((ele) => (
@@ -91,6 +63,8 @@ export default function Game() {
   return (
     <div className="game-container">
       {win[0] && <h1>{win[1]} WIN</h1>}
+      {tie && <h1>TIE</h1>}
+      {console.log(tie)}
       <div className="board">{renderBoard}</div>
       <button onClick={restartGame} className="restart-btn">
         Restart
