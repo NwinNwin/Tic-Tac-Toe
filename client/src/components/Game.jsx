@@ -3,8 +3,6 @@ import { useEffect } from "react";
 import { checkWin, checkTie } from "../utils";
 
 //TODO:
-// - make a function to check if win
-// - change 1, 2 to X, O
 // - make it look pretty
 
 export default function Game() {
@@ -45,6 +43,7 @@ export default function Game() {
   function restartGame() {
     setGame((prev) => prev.map((box) => ({ ...box, value: "" })));
     setTurn("X");
+    setWin([false, ""]);
     setTie(false);
   }
 
@@ -53,7 +52,9 @@ export default function Game() {
     <div
       className="box"
       onClick={() => {
-        handleBoxClick(ele.id);
+        if (!win[0] && !tie) {
+          handleBoxClick(ele.id);
+        }
       }}
     >
       <h1>{ele.value}</h1>
