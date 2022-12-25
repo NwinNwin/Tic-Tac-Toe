@@ -20,6 +20,7 @@ export default function Game() {
   const [turn, setTurn] = useState("X");
   const [win, setWin] = useState([false, ""]);
   const [tie, setTie] = useState(false);
+  const [winningBoxes, setWinningBoxes] = useState([]);
 
   //[0, 0, 0]
   //[0, 0, 0]
@@ -29,8 +30,10 @@ export default function Game() {
   //O: 2
 
   useEffect(() => {
-    setWin(checkWin(game));
+    let winning = checkWin(game);
+    setWin(winning[0]);
     setTie(checkTie(game, win));
+    setWinningBoxes(winning[1]);
   }, [turn]);
   //when each box get clicked (set box to that value, switch turn)
 
@@ -45,12 +48,13 @@ export default function Game() {
     setTurn("X");
     setWin([false, ""]);
     setTie(false);
+    setWinningBoxes([]);
   }
 
   //render value in each box
   const renderBoard = game.map((ele) => (
     <div
-      className="box"
+      className={winningBoxes.includes(ele.id) ? "box winning-box" : "box"}
       onClick={() => {
         if (!win[0] && !tie) {
           handleBoxClick(ele.id);

@@ -15,11 +15,15 @@ body {
 .box {
   width: 9vw;
   height: 9vw;
-  /* background-color: rgba(255, 255, 255, 0.8); */
+  border: white solid 10px;
   text-align: center;
   border-radius: 20%;
   background: linear-gradient(45deg, #e2a9a9, #ffc9c9);
   box-shadow: 29px -29px 79px #cb9898, -29px 29px 79px #ffe0e0;
+}
+
+.winning-box {
+  border: yellow solid 10px;
 }
 
 .game-container {
