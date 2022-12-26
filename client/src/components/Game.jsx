@@ -5,7 +5,7 @@ import x from "../images/x.svg";
 import o from "../images/o.svg";
 import restart from "../images/restart.svg";
 
-export default function Game() {
+export default function Game({ socket, username, room }) {
   const [game, setGame] = useState([
     { id: 0, value: "" },
     { id: 1, value: "" },
