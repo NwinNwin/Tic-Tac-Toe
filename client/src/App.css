@@ -5,7 +5,7 @@ body {
 }
 
 .board {
-  margin: 0 auto;
+  margin: 3% auto 2% auto;
   width: 30vw;
   height: 30vw;
   display: grid;
@@ -15,7 +15,7 @@ body {
 .box {
   width: 9vw;
   height: 9vw;
-  border: white solid 10px;
+  border: white solid 0.6vw;
   text-align: center;
   border-radius: 20%;
   background: linear-gradient(45deg, #e2a9a9, #ffc9c9);
@@ -35,7 +35,7 @@ svg {
   color: white;
 }
 .winning-box {
-  border: yellow solid 10px;
+  border: rgb(255, 255, 0) solid 0.6vw;
 }
 
 .game-container {
@@ -43,14 +43,34 @@ svg {
 }
 
 .restart-btn {
-  height: 30px;
-  width: 100px;
-  margin: 2%;
+  font-weight: 700;
+  height: 4vw;
+  width: 5vw;
   border: 0;
-  background-color: darkblue;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #e86f6f, #c35e5e);
+  box-shadow: 10px 10px 40px #b85858, -27px -27px 54px #fa7878;
   color: white;
+}
+
+.restart-btn:active {
+  transform: translateY(2px);
+  background: linear-gradient(145deg, #e86f6f, #8b3b3b);
+}
+
+.restart-logo {
+  height: 2vw;
 }
 
 .box h1 {
   margin: 0;
+}
+
+.result-container {
+  color: #5c1111;
+  margin-top: 1.5%;
+  font-size: 2rem;
+  height: 1vw;
+  width: 100vw;
+  font-family: "Inter";
 }

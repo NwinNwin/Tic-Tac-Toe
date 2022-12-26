@@ -3,9 +3,7 @@ import { useEffect } from "react";
 import { checkWin, checkTie } from "../utils";
 import x from "../images/x.svg";
 import o from "../images/o.svg";
-
-//TODO:
-// - make it look pretty
+import restart from "../images/restart.svg";
 
 export default function Game() {
   const [game, setGame] = useState([
@@ -24,21 +22,14 @@ export default function Game() {
   const [tie, setTie] = useState(false);
   const [winningBoxes, setWinningBoxes] = useState([]);
 
-  //[0, 0, 0]
-  //[0, 0, 0]
-  //[0, 0, 0]
-  //Empty: 0
-  //X: 1
-  //O: 2
-
   useEffect(() => {
     let winning = checkWin(game);
     setWin(winning[0]);
     setTie(checkTie(game, win));
     setWinningBoxes(winning[1]);
   }, [turn]);
-  //when each box get clicked (set box to that value, switch turn)
 
+  //when each box get clicked (set box to that value, switch turn)
   function handleBoxClick(id) {
     setGame((prev) => prev.map((box) => (box.id === id && box.value === "" ? { ...box, value: turn } : box)));
     setTurn((prev) => (prev === "X" ? "O" : "X"));
@@ -69,12 +60,15 @@ export default function Game() {
 
   return (
     <div className="game-container">
-      {win[0] && <h1>{win[1]} WIN</h1>}
-      {tie && <h1>TIE</h1>}
+      <div className="result-container">
+        <h1>{win[0] && `${win[1]} WINS!`}</h1>
+        <h1>{tie && !win[0] ? "TIE" : ""}</h1>
+      </div>
+
       {console.log(tie)}
       <div className="board">{renderBoard}</div>
       <button onClick={restartGame} className="restart-btn">
-        Restart
+        <img className="restart-logo" src={restart} alt="" />
       </button>
     </div>
   );
