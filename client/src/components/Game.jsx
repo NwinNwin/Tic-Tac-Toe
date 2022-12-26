@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { checkWin, checkTie } from "../utils";
+import x from "../images/x.svg";
+import o from "../images/o.svg";
 
 //TODO:
 // - make it look pretty
@@ -61,7 +63,7 @@ export default function Game() {
         }
       }}
     >
-      <h1>{ele.value}</h1>
+      {ele.value === "O" ? <img className="x-or-o" src={o} alt="" width="100%" /> : ele.value === "X" ? <img className="x-or-o" src={x} width="70%" height="70%" /> : ele.value}
     </div>
   ));
 

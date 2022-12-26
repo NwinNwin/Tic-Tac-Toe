@@ -22,6 +22,18 @@ body {
   box-shadow: 29px -29px 79px #cb9898, -29px 29px 79px #ffe0e0;
 }
 
+.box:active {
+  transform: translateY(2px);
+}
+
+.x-or-o {
+  width: 6vw;
+  margin-top: 15%;
+}
+
+svg {
+  color: white;
+}
 .winning-box {
   border: yellow solid 10px;
 }
