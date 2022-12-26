@@ -1,5 +1,6 @@
 import "./App.css";
 import Game from "./components/Game";
+import MultiplayerGame from "./components/MutiplayerGame";
 import io from "socket.io-client";
 import { useState } from "react";
 
@@ -46,7 +47,7 @@ function App() {
           <button onClick={joinRoom}>Join a Room</button>
         </div>
       ) : (
-        <Game socket={socket} username={username} room={room} />
+        <MultiplayerGame socket={socket} username={username} room={room} />
       )}
     </div>
   );

@@ -16,6 +16,19 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   //socket is each user (socket has many info)
   console.log(`User Connected : ${socket.id}`);
+
+  //pass room id from front-end
+  //"join_room" is used in line 14 in the front-end (App)
+  socket.on("join_room", (data) => {
+    socket.join(data);
+    console.log(`User with ID: ${socket.id} joined room : ${data}`);
+  });
+
+  socket.on("send_game", (data) => {
+    socket.to(data.room).emit("receive_game", data);
+    console.log(data);
+  });
+
   //when user disconnect
   socket.on("disconnect", () => {
     console.log("User Disconnected", socket.id);
