@@ -17,11 +17,14 @@ export default function MultiplayerGame({ socket, username, room }) {
     { id: 7, value: "" },
     { id: 8, value: "" },
   ]);
+
   const [turn, setTurn] = useState("X");
   const [win, setWin] = useState([false, ""]);
   const [tie, setTie] = useState(false);
   const [winningBoxes, setWinningBoxes] = useState([]);
   const [sendingTurn, setSendingTurn] = useState("X");
+  const [allowMove, setAllowMove] = useState(true);
+  const [player, setPlayer] = useState("");
 
   useEffect(() => {
     let winning = checkWin(game);
@@ -35,13 +38,14 @@ export default function MultiplayerGame({ socket, username, room }) {
     setGame((prev) => prev.map((box) => (box.id === id && box.value === "" ? { ...box, value: turn } : box)));
     setTurn((prev) => (prev === "X" ? "O" : "X"));
     setSendingTurn((prev) => (prev === "X" ? "O" : "X"));
+    setAllowMove(false);
 
     //send game, turn to other player
     // await socket.emit("send_game", { game: game, turn: turn, room: room });
   }
 
   async function sendGame() {
-    await socket.emit("send_game", { game: game, turn: turn, room: room });
+    await socket.emit("send_game", { game: game, turn: turn, room: room, username: username });
   }
 
   //restart game
@@ -53,23 +57,28 @@ export default function MultiplayerGame({ socket, username, room }) {
     setWinningBoxes([]);
     setSendingTurn("X");
   }
+
   useEffect(() => {
     sendGame();
   }, [sendingTurn]);
 
   useEffect(() => {
-    socket.on("receive_game", (data) => {
+    const eventListener = (data) => {
       setGame(data.game);
       setTurn(data.turn);
-    });
-  });
+      setAllowMove(true);
+      setPlayer(data.username);
+    };
+    socket.on("receive_game", eventListener);
+    return () => socket.off("receive_game", eventListener);
+  }, [socket]);
 
   //render value in each box
   const renderBoard = game.map((ele) => (
     <div
       className={winningBoxes.includes(ele.id) ? "box winning-box" : "box"}
       onClick={() => {
-        if (!win[0] && !tie && ele.value == "") {
+        if (!win[0] && !tie && ele.value == "" && allowMove) {
           handleBoxClick(ele.id);
         }
       }}
@@ -81,11 +90,10 @@ export default function MultiplayerGame({ socket, username, room }) {
   return (
     <div className="game-container">
       <div className="result-container">
-        <h1>{win[0] && `${win[1]} WINS!`}</h1>
+        <h1>{win[0] && !allowMove ? `GG EZ!` : win[0] && allowMove ? "lmao L!" : ""}</h1>
         <h1>{tie && !win[0] ? "TIE" : ""}</h1>
+        <h1>{!tie && !win[0] && !allowMove ? `${player} 'S TURN` : ""}</h1>
       </div>
-
-      {console.log(tie)}
       <div className="board">{renderBoard}</div>
       <button onClick={restartGame} className="restart-btn">
         <img className="restart-logo" src={restart} alt="" />
