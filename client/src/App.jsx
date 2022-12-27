@@ -3,6 +3,7 @@ import Game from "./components/Game";
 import MultiplayerGame from "./components/MutiplayerGame";
 import io from "socket.io-client";
 import { useState } from "react";
+import join from "./images/join.svg";
 
 const socket = io.connect("http://localhost:3001");
 
@@ -28,23 +29,25 @@ function App() {
   return (
     <div className="App">
       {!showGame ? (
-        <div className="joinChatContainer">
-          <h3>Join a Chat</h3>
+        <div className="joinGameContainer">
+          <h3>Join a Game</h3>
           <input
             type="text"
-            placeholder="John..."
+            placeholder="Name"
             onChange={(event) => {
               setUsername(event.target.value);
             }}
           />
           <input
             type="text"
-            placeholder="Room ID ..."
+            placeholder="Room ID"
             onChange={(event) => {
               setRoom(event.target.value);
             }}
           />
-          <button onClick={joinRoom}>Join a Room</button>
+          <button onClick={joinRoom}>
+            <img src={join} alt="" className="join-btn-img" />
+          </button>
         </div>
       ) : (
         <MultiplayerGame socket={socket} username={username} room={room} />

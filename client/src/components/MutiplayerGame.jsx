@@ -88,16 +88,18 @@ export default function MultiplayerGame({ socket, username, room }) {
   ));
 
   return (
-    <div className="game-container">
+    <div className="multiplayer">
       <div className="result-container">
         <h1>{win[0] && !allowMove ? `GG EZ!` : win[0] && allowMove ? "lmao L!" : ""}</h1>
         <h1>{tie && !win[0] ? "TIE" : ""}</h1>
-        <h1>{!tie && !win[0] && !allowMove ? `${player} 'S TURN` : ""}</h1>
+        <h1>{!tie && !win[0] && !allowMove && player !== "" ? `${player} 'S TURN` : !tie && !win[0] && !allowMove && player == "" ? "NOT YOUR TURN!" : ""}</h1>
       </div>
-      <div className="board">{renderBoard}</div>
-      <button onClick={restartGame} className="restart-btn">
-        <img className="restart-logo" src={restart} alt="" />
-      </button>
+      <div className="game-container">
+        <div className="board">{renderBoard}</div>
+        <button onClick={restartGame} className="restart-btn">
+          <img className="restart-logo" src={restart} alt="" />
+        </button>
+      </div>
     </div>
   );
 }

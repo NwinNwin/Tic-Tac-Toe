@@ -5,7 +5,7 @@ body {
 }
 
 .board {
-  margin: 3% auto 2% auto;
+  margin: 3.9% auto 2% auto;
   width: 30vw;
   height: 30vw;
   display: grid;
@@ -68,9 +68,72 @@ svg {
 
 .result-container {
   color: #5c1111;
-  margin-top: 1.5%;
-  font-size: 2rem;
+  margin: 0;
+  font-size: 1.8vw !important;
   height: 1vw;
   width: 100vw;
   font-family: "Inter";
+}
+
+.multiplayer {
+  text-align: center;
+}
+
+.joinGameContainer {
+  height: 50vh;
+  width: 30vw;
+  border-radius: 3vw;
+  margin: 5% auto;
+  background: linear-gradient(145deg, #fda8a8, #d48d8d);
+  box-shadow: 32px 32px 64px #b87a7a, -32px -32px 64px #ffc0c0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1%;
+}
+
+.joinGameContainer h3 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-family: "Inter";
+  color: white;
+}
+.joinGameContainer input {
+  font-family: "Inter";
+  font-weight: bold;
+  outline: none;
+  width: 12vw;
+  height: 4vh;
+  border: 0;
+  margin: 3%;
+  background: #ffffff;
+  box-shadow: inset 21px 21px 42px #cccccc, inset -21px -21px 42px #ffffff;
+  border-radius: 0.7vw;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.joinGameContainer input::placeholder {
+  font-family: "inter";
+}
+
+.joinGameContainer button {
+  width: 4vw;
+  height: 4wv;
+  margin: 7px;
+  border: none;
+  border-radius: 0.7vw;
+  padding: 1%;
+  font-size: 16px;
+  background: linear-gradient(145deg, #ff8b8b, #db7575);
+  box-shadow: 5px 5px 10px #ca6c6c, -5px -5px 10px #ff9898;
+  cursor: pointer;
+}
+.join-btn-img {
+  width: 2vw;
+  height: 2vw;
+}
+
+.joinGameContainer button:hover {
+  background: #bd5e59;
 }
