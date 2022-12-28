@@ -5,7 +5,7 @@ import x from "../images/x.svg";
 import o from "../images/o.svg";
 import restart from "../images/restart.svg";
 
-export default function MultiplayerGame({ socket, username, room }) {
+export default function MultiplayerGame({ socket, username, room, setShowMultiplayerGame }) {
   const [game, setGame] = useState([
     { id: 0, value: "" },
     { id: 1, value: "" },
@@ -78,7 +78,7 @@ export default function MultiplayerGame({ socket, username, room }) {
     <div
       className={winningBoxes.includes(ele.id) ? "box winning-box" : "box"}
       onClick={() => {
-        if (!win[0] && !tie && ele.value == "" && allowMove) {
+        if (!win[0] && !tie && ele.value === "" && allowMove) {
           handleBoxClick(ele.id);
         }
       }}
@@ -92,7 +92,7 @@ export default function MultiplayerGame({ socket, username, room }) {
       <div className="result-container">
         <h1>{win[0] && !allowMove ? `GG EZ!` : win[0] && allowMove ? "lmao L!" : ""}</h1>
         <h1>{tie && !win[0] ? "TIE" : ""}</h1>
-        <h1>{!tie && !win[0] && !allowMove && player !== "" ? `${player} 'S TURN` : !tie && !win[0] && !allowMove && player == "" ? "NOT YOUR TURN!" : ""}</h1>
+        <h1>{!tie && !win[0] && !allowMove && player !== "" ? `${player} 'S TURN` : !tie && !win[0] && !allowMove && player === "" ? "NOT YOUR TURN!" : ""}</h1>
       </div>
       <div className="game-container">
         <div className="board">{renderBoard}</div>
@@ -100,6 +100,13 @@ export default function MultiplayerGame({ socket, username, room }) {
           <img className="restart-logo" src={restart} alt="" />
         </button>
       </div>
+      <button
+        onClick={() => {
+          setShowMultiplayerGame(false);
+        }}
+      >
+        X
+      </button>
     </div>
   );
 }

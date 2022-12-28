@@ -5,7 +5,7 @@ import x from "../images/x.svg";
 import o from "../images/o.svg";
 import restart from "../images/restart.svg";
 
-export default function Game({ socket, username, room }) {
+export default function Game(props) {
   const [game, setGame] = useState([
     { id: 0, value: "" },
     { id: 1, value: "" },
@@ -69,6 +69,13 @@ export default function Game({ socket, username, room }) {
       <div className="board">{renderBoard}</div>
       <button onClick={restartGame} className="restart-btn">
         <img className="restart-logo" src={restart} alt="" />
+      </button>
+      <button
+        onClick={() => {
+          props.setOfflineGame(false);
+        }}
+      >
+        X
       </button>
     </div>
   );

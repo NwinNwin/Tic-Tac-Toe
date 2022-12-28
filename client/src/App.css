@@ -118,6 +118,7 @@ svg {
 }
 
 .joinGameContainer button {
+  color: white;
   width: 4vw;
   height: 4wv;
   margin: 7px;
@@ -135,5 +136,36 @@ svg {
 }
 
 .joinGameContainer button:hover {
-  background: #bd5e59;
+  background: #d67671;
+}
+
+.home-btn-img {
+  width: 6vw;
+  height: 6vw;
+}
+
+.home-btn {
+  text-align: center;
+  width: 7vw;
+  height: 7wv;
+  margin: 7px;
+  border: none;
+  border-radius: 0.7vw;
+  padding: 1%;
+  background: linear-gradient(145deg, #ff8b8b, #db7575);
+  box-shadow: 5px 5px 10px #ca6c6c, -5px -5px 10px #ff9898;
+  cursor: pointer;
+  margin: 2%;
+}
+
+.home-btn:hover {
+  transform: translateY(2px);
+  background: #d67671;
+}
+
+.home {
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
