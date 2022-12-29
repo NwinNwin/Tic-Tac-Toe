@@ -4,6 +4,8 @@ import { checkWin, checkTie } from "../utils";
 import x from "../images/x.svg";
 import o from "../images/o.svg";
 import restart from "../images/restart.svg";
+import exit from "../images/exit.svg";
+import Chat from "./Chat";
 
 export default function MultiplayerGame({ socket, username, room, setShowMultiplayerGame }) {
   const [game, setGame] = useState([
@@ -101,12 +103,14 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
         </button>
       </div>
       <button
+        className="exit-btn"
         onClick={() => {
           setShowMultiplayerGame(false);
         }}
       >
-        X
+        <img className="restart-logo" src={exit} alt="" />
       </button>
+      <Chat socket={socket} room={room} username={username} />
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { checkWin, checkTie } from "../utils";
 import x from "../images/x.svg";
 import o from "../images/o.svg";
 import restart from "../images/restart.svg";
+import exit from "../images/exit.svg";
 
 export default function Game(props) {
   const [game, setGame] = useState([
@@ -71,11 +72,12 @@ export default function Game(props) {
         <img className="restart-logo" src={restart} alt="" />
       </button>
       <button
+        className="exit-btn"
         onClick={() => {
           props.setOfflineGame(false);
         }}
       >
-        X
+        <img className="restart-logo" src={exit} alt="" />
       </button>
     </div>
   );

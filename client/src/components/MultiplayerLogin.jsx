@@ -1,5 +1,6 @@
 import React from "react";
 import join from "../images/join.svg";
+import exit from "../images/exit.svg";
 
 export default function MultiplayerLogin(props) {
   return props.trigger ? (
@@ -22,7 +23,9 @@ export default function MultiplayerLogin(props) {
       <button onClick={props.joinRoom}>
         <img src={join} alt="" className="join-btn-img" />
       </button>
-      <button onClick={() => props.setMultiplayerPopUp(false)}>close</button>
+      <button className="exit-btn" onClick={() => props.setMultiplayerPopUp(false)}>
+        <img className="restart-logo" src={exit} alt="" />
+      </button>
     </div>
   ) : (
     ""

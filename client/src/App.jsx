@@ -2,6 +2,7 @@ import "./App.css";
 import Game from "./components/Game";
 import MultiplayerGame from "./components/MutiplayerGame";
 import MultiplayerLogin from "./components/MultiplayerLogin";
+import Home from "./components/Home";
 import io from "socket.io-client";
 import { useState } from "react";
 import offline from "./images/offline.svg";
@@ -27,30 +28,7 @@ function App() {
   return (
     <div className="App">
       <main>
-        {!ShowMultiplayerGame && !MultiplayerPopUp && !offlineGame && (
-          <div className="home">
-            {/*Multiplayer Game Button */}
-            <div
-              onClick={() => {
-                setMultiplayerPopUp(true);
-              }}
-              className="home-btn"
-              title="Online"
-            >
-              <img src={online} alt="" className="home-btn-img" />
-            </div>
-            {/*Offline Game Button */}
-            <div
-              onClick={() => {
-                setOfflineGame(true);
-              }}
-              className="home-btn"
-              title="Offline"
-            >
-              <img src={offline} alt="" className="home-btn-img" />
-            </div>
-          </div>
-        )}
+        {!ShowMultiplayerGame && !MultiplayerPopUp && !offlineGame && <Home setMultiplayerPopUp={setMultiplayerPopUp} setOfflineGame={setOfflineGame} />}
 
         <MultiplayerLogin trigger={MultiplayerPopUp} joinRoom={joinRoom} setUsername={setUsername} setRoom={setRoom} setMultiplayerPopUp={setMultiplayerPopUp} />
         {ShowMultiplayerGame && <MultiplayerGame socket={socket} username={username} room={room} setShowMultiplayerGame={setShowMultiplayerGame} />}
