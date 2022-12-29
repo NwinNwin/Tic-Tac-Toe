@@ -6,6 +6,8 @@ import o from "../images/o.svg";
 import restart from "../images/restart.svg";
 import exit from "../images/exit.svg";
 import Chat from "./Chat";
+import chat_logo from "../images/chat_logo.svg";
+import arrow_up from "../images/arrow_up.svg";
 
 export default function MultiplayerGame({ socket, username, room, setShowMultiplayerGame }) {
   const [game, setGame] = useState([
@@ -27,6 +29,7 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
   const [sendingTurn, setSendingTurn] = useState("X");
   const [allowMove, setAllowMove] = useState(true);
   const [player, setPlayer] = useState("");
+  const [openChat, setOpenChat] = useState(false);
 
   useEffect(() => {
     let winning = checkWin(game);
@@ -102,15 +105,39 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
           <img className="restart-logo" src={restart} alt="" />
         </button>
       </div>
-      <button
-        className="exit-btn"
-        onClick={() => {
-          setShowMultiplayerGame(false);
-        }}
-      >
-        <img className="restart-logo" src={exit} alt="" />
-      </button>
-      <Chat socket={socket} room={room} username={username} />
+      <div className="tool-bar">
+        {" "}
+        <button
+          className="exit-btn"
+          onClick={() => {
+            setShowMultiplayerGame(false);
+          }}
+        >
+          <img className="restart-logo" src={exit} alt="" />
+        </button>
+        <button className="chat-btn">
+          {openChat ? (
+            <img
+              onClick={() => {
+                setOpenChat((prev) => !prev);
+              }}
+              className="restart-logo"
+              src={chat_logo}
+            />
+          ) : (
+            <img
+              onClick={() => {
+                setOpenChat((prev) => !prev);
+              }}
+              className="restart-logo"
+              src={arrow_up}
+            />
+          )}
+        </button>
+        <div className={openChat && "hide"}>
+          <Chat socket={socket} room={room} username={username} />
+        </div>
+      </div>
     </div>
   );
 }

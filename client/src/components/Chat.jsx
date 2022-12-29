@@ -42,7 +42,7 @@ export default function Chat({ socket, username, room }) {
             //back-end send "data" to front end
             return (
               //username is a the user who using this (from props we passed in APP.js)
-              <div className="message" id={username === messageContent.author ? "other" : "you"}>
+              <div className="message" id={username === messageContent.author ? "you" : "other"}>
                 <div>
                   <div className="message-content">
                     <p>{messageContent.message}</p>
