@@ -87,7 +87,7 @@ svg {
 }
 
 .joinGameContainer {
-  height: 50vh;
+  height: 45vh;
   width: 30vw;
   border-radius: 3vw;
   margin: 5% auto;
@@ -228,7 +228,9 @@ svg {
 
 .chat-window .chat-body {
   height: 30vh;
-  border: 2px solid #964646;
+  border: 2px solid white;
+  border-top: 0;
+  border-bottom: 0;
   background: #eec9c9;
   font-family: "Inter";
 
@@ -316,8 +318,8 @@ svg {
   background: linear-gradient(145deg, #f27878, #cb6565);
   box-shadow: 10px 10px 52px #cb6565, -10px -10px 52px #f97b7b;
   height: 40px;
-  border: 2px solid #964646;
-  border-top: none;
+
+  border-top: 0;
   display: flex;
   border-radius: 0 0 1vw 1vw;
 }
@@ -388,4 +390,47 @@ svg {
 .chat-btn:hover {
   transform: translateY(2px);
   background: linear-gradient(145deg, #e86f6f, #8b3b3b);
+}
+
+.score-bar {
+  margin-top: 5%;
+  width: 10vw;
+  height: 50vh;
+  position: absolute;
+  top: 5%;
+  left: 20%;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-family: "inter";
+  border-radius: 50px;
+  background: linear-gradient(145deg, #c78888, #eca2a2);
+  box-shadow: 33px 33px 65px #ce8c8c, -33px -33px 65px #eca2a2;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-line {
+  width: 4rem;
+  height: 1rem;
+  border-radius: 5px;
+  border: 0;
+  background: linear-gradient(145deg, #ffffff, #d2d1d1);
+}
+
+.score-player {
+  margin: 3%;
+  font-weight: 100;
+
+  font-size: 2.5rem;
+  color: linear-gradient(145deg, #ffffff, #d2d1d1);
+}
+
+.score-number {
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+.close-btn p {
+  margin: 0;
 }

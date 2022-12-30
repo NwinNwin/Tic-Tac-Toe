@@ -30,6 +30,9 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
   const [allowMove, setAllowMove] = useState(true);
   const [player, setPlayer] = useState("");
   const [openChat, setOpenChat] = useState(false);
+  const [yourScore, setYourScore] = useState(0);
+  const [otherScore, setOtherScore] = useState(0);
+  const [userLeft, setUserLeft] = useState("");
 
   useEffect(() => {
     let winning = checkWin(game);
@@ -67,6 +70,7 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
     sendGame();
   }, [sendingTurn]);
 
+  //receive the game when opponent make move
   useEffect(() => {
     const eventListener = (data) => {
       setGame(data.game);
@@ -77,6 +81,33 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
     socket.on("receive_game", eventListener);
     return () => socket.off("receive_game", eventListener);
   }, [socket]);
+
+  //change state when opponent left the room
+  useEffect(() => {
+    const eventListener = (data) => {
+      setUserLeft(data);
+    };
+    socket.on("user_left", eventListener);
+    return () => socket.off("user_left", eventListener);
+  }, [socket]);
+
+  useEffect(() => {
+    const eventListener = (data) => {
+      setUserLeft("");
+      setPlayer(data);
+    };
+    socket.on("user_joined", eventListener);
+    return () => socket.off("user_joined", eventListener);
+  }, [socket]);
+
+  //keep score
+  useEffect(() => {
+    if (win[0] && !allowMove) {
+      setYourScore((prev) => prev + 1);
+    } else if (win[0] && allowMove) {
+      setOtherScore((prev) => prev + 1);
+    }
+  }, [win[0]]);
 
   //render value in each box
   const renderBoard = game.map((ele) => (
@@ -97,7 +128,8 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
       <div className="result-container">
         <h1>{win[0] && !allowMove ? `GG EZ!` : win[0] && allowMove ? "lmao L!" : ""}</h1>
         <h1>{tie && !win[0] ? "TIE" : ""}</h1>
-        <h1>{!tie && !win[0] && !allowMove && player !== "" ? `${player} 'S TURN` : !tie && !win[0] && !allowMove && player === "" ? "NOT YOUR TURN!" : ""}</h1>
+        <h1>{!tie && !win[0] && !allowMove && player !== "" ? `${player} 's turn` : !tie && !win[0] && !allowMove && player === "" ? "Waiting for other player..." : ""}</h1>
+        <h1>{userLeft !== "" && `${userLeft} left`}</h1>
       </div>
       <div className="game-container">
         <div className="board">{renderBoard}</div>
@@ -105,12 +137,20 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
           <img className="restart-logo" src={restart} alt="" />
         </button>
       </div>
+      <div className="score-bar">
+        <h1 className="score-player">{username}</h1>
+        <h2 className="score-number">{yourScore}</h2>
+        <hr className="score-line" />
+        <h2 className="score-number">{otherScore}</h2>
+        <h1 className="score-player">{player !== "" ? player : "player 2"}</h1>
+      </div>
       <div className="tool-bar">
         {" "}
         <button
           className="exit-btn"
           onClick={() => {
             setShowMultiplayerGame(false);
+            socket.emit("leave_room", { room: room, username: username });
           }}
         >
           <img className="restart-logo" src={exit} alt="" />
@@ -135,7 +175,7 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
           )}
         </button>
         <div className={openChat && "hide"}>
-          <Chat socket={socket} room={room} username={username} />
+          <Chat userLeft={userLeft} socket={socket} room={room} username={username} />
         </div>
       </div>
     </div>

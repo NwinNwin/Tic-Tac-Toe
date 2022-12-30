@@ -20,7 +20,7 @@ function App() {
   const joinRoom = () => {
     //only allow users who have name and room id to join
     if (username !== "" && room !== "") {
-      socket.emit("join_room", room);
+      socket.emit("join_room", { room: room, username: username });
       setShowMultiplayerGame(true);
       setMultiplayerPopUp(false);
     }

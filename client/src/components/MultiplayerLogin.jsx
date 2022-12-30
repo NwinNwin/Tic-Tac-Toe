@@ -5,7 +5,7 @@ import exit from "../images/exit.svg";
 export default function MultiplayerLogin(props) {
   return props.trigger ? (
     <div className="joinGameContainer">
-      <h3>Join a Game</h3>
+      <h3>Join / Create a Room</h3>
       <input
         type="text"
         placeholder="Name"
@@ -23,8 +23,8 @@ export default function MultiplayerLogin(props) {
       <button onClick={props.joinRoom}>
         <img src={join} alt="" className="join-btn-img" />
       </button>
-      <button className="exit-btn" onClick={() => props.setMultiplayerPopUp(false)}>
-        <img className="restart-logo" src={exit} alt="" />
+      <button className="close-btn" onClick={() => props.setMultiplayerPopUp(false)}>
+        <p>close</p>
       </button>
     </div>
   ) : (

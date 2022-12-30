@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 
-export default function Chat({ socket, username, room }) {
+export default function Chat({ socket, username, room, userLeft }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
