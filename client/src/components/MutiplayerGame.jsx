@@ -140,7 +140,7 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
       <div className="score-bar">
         <h1 className="score-player">{username}</h1>
         <h2 className="score-number">{yourScore}</h2>
-        <hr className="score-line" />
+        <div className="score-line"></div>
         <h2 className="score-number">{otherScore}</h2>
         <h1 className="score-player">{player !== "" ? player : "player 2"}</h1>
       </div>
