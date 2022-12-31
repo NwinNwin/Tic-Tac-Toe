@@ -7,7 +7,7 @@ import restart from "../images/restart.svg";
 import exit from "../images/exit.svg";
 import Chat from "./Chat";
 import chat_logo from "../images/chat_logo.svg";
-import arrow_up from "../images/arrow_up.svg";
+import arrow_up from "../images/no_chat.svg";
 
 export default function MultiplayerGame({ socket, username, room, setShowMultiplayerGame }) {
   const [game, setGame] = useState([

@@ -71,14 +71,16 @@ export default function Game(props) {
       <button onClick={restartGame} className="restart-btn">
         <img className="restart-logo" src={restart} alt="" />
       </button>
-      <button
-        className="exit-btn"
-        onClick={() => {
-          props.setOfflineGame(false);
-        }}
-      >
-        <img className="restart-logo" src={exit} alt="" />
-      </button>
+      <div className="tool-bar">
+        <button
+          className="exit-btn"
+          onClick={() => {
+            props.setOfflineGame(false);
+          }}
+        >
+          <img className="restart-logo" src={exit} alt="" />
+        </button>
+      </div>
     </div>
   );
 }
