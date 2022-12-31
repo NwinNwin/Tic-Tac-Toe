@@ -32,7 +32,7 @@ function checkWin(game) {
       ];
     }
   }
-  return [false, ""];
+  return [[false, ""], []];
 }
 
 function checkTie(game, win) {

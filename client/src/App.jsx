@@ -5,8 +5,7 @@ import MultiplayerLogin from "./components/MultiplayerLogin";
 import Home from "./components/Home";
 import io from "socket.io-client";
 import { useState } from "react";
-import offline from "./images/offline.svg";
-import online from "./images/online.svg";
+import BotGame from "./components/BotGame";
 
 const socket = io.connect("http://localhost:3001");
 
@@ -16,6 +15,7 @@ function App() {
   const [ShowMultiplayerGame, setShowMultiplayerGame] = useState(false);
   const [MultiplayerPopUp, setMultiplayerPopUp] = useState(false);
   const [offlineGame, setOfflineGame] = useState(false);
+  const [botGame, setBotGame] = useState(false);
 
   const joinRoom = () => {
     //only allow users who have name and room id to join
@@ -28,11 +28,12 @@ function App() {
   return (
     <div className="App">
       <main>
-        {!ShowMultiplayerGame && !MultiplayerPopUp && !offlineGame && <Home setMultiplayerPopUp={setMultiplayerPopUp} setOfflineGame={setOfflineGame} />}
+        {!ShowMultiplayerGame && !MultiplayerPopUp && !offlineGame && !botGame && <Home setMultiplayerPopUp={setMultiplayerPopUp} setOfflineGame={setOfflineGame} setBotGame={setBotGame} />}
 
         <MultiplayerLogin trigger={MultiplayerPopUp} joinRoom={joinRoom} setUsername={setUsername} setRoom={setRoom} setMultiplayerPopUp={setMultiplayerPopUp} />
         {ShowMultiplayerGame && <MultiplayerGame socket={socket} username={username} room={room} setShowMultiplayerGame={setShowMultiplayerGame} />}
         {offlineGame && <Game setOfflineGame={setOfflineGame} />}
+        {botGame && <BotGame setBotGame={setBotGame} />}
       </main>
     </div>
   );

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { checkWin, checkTie } from "../utils";
+import { aiMove } from "../ai";
 import x from "../images/x.svg";
 import o from "../images/o.svg";
 import restart from "../images/restart.svg";
@@ -22,6 +22,7 @@ export default function Game(props) {
   const [win, setWin] = useState([false, ""]);
   const [tie, setTie] = useState(false);
   const [winningBoxes, setWinningBoxes] = useState([]);
+  const [aiTurn, setAiTurn] = useState(false);
 
   useEffect(() => {
     let winning = checkWin(game);
@@ -32,9 +33,19 @@ export default function Game(props) {
 
   //when each box get clicked (set box to that value, switch turn)
   function handleBoxClick(id) {
-    setGame((prev) => prev.map((box) => (box.id === id && box.value === "" ? { ...box, value: turn } : box)));
+    setGame((prev) => prev.map((box) => (box.id === id && box.value === "" ? { ...box, value: "X" } : box)));
     setTurn((prev) => (prev === "X" ? "O" : "X"));
+    setAiTurn(true);
   }
+
+  //Ai moves when its turn
+
+  useEffect(() => {
+    if (aiTurn) {
+      aiMove(game, setTurn);
+      setAiTurn(false);
+    }
+  }, [aiTurn]);
 
   //restart game
   function restartGame() {
@@ -66,7 +77,6 @@ export default function Game(props) {
         <h1>{tie && !win[0] ? "TIE" : ""}</h1>
       </div>
 
-      {console.log(tie)}
       <div className="board">{renderBoard}</div>
       <button onClick={restartGame} className="restart-btn">
         <img className="restart-logo" src={restart} alt="" />
@@ -75,7 +85,7 @@ export default function Game(props) {
         <button
           className="exit-btn"
           onClick={() => {
-            props.setOfflineGame(false);
+            props.setBotGame(false);
           }}
         >
           <img className="restart-logo" src={exit} alt="" />

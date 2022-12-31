@@ -385,7 +385,6 @@ body {
 }
 
 .chat-btn:hover {
-  transform: translateY(2px);
   background: linear-gradient(145deg, #e86f6f, #8b3b3b);
 }
 
@@ -433,7 +432,7 @@ body {
 }
 
 /* mobile styling */
-@media (max-width: 1300px) {
+@media (max-width: 900px) {
   body {
     margin-top: 37%;
   }
