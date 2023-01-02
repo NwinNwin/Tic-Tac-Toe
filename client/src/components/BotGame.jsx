@@ -5,6 +5,8 @@ import x from "../images/x.svg";
 import o from "../images/o.svg";
 import restart from "../images/restart.svg";
 import exit from "../images/exit.svg";
+import BotGamePopUp from "./BotGamePopUp";
+import setting from "../images/setting.svg";
 
 export default function Game(props) {
   const [game, setGame] = useState([
@@ -22,7 +24,17 @@ export default function Game(props) {
   const [win, setWin] = useState([false, ""]);
   const [tie, setTie] = useState(false);
   const [winningBoxes, setWinningBoxes] = useState([]);
+
+  //false if O, true if X
   const [aiTurn, setAiTurn] = useState(false);
+
+  const [showPopUp, setShowPopUp] = useState(false);
+
+  //allow player to let AI be X or O
+  const [aiX_O, setAiX_O] = useState("O");
+
+  // 1: easy, 4: hard, 100:impossible
+  const [botLevel, setBotLevel] = useState(100);
 
   useEffect(() => {
     let winning = checkWin(game);
@@ -33,7 +45,7 @@ export default function Game(props) {
 
   //when each box get clicked (set box to that value, switch turn)
   function handleBoxClick(id) {
-    setGame((prev) => prev.map((box) => (box.id === id && box.value === "" ? { ...box, value: "X" } : box)));
+    setGame((prev) => prev.map((box) => (box.id === id && box.value === "" ? { ...box, value: turn } : box)));
     setTurn((prev) => (prev === "X" ? "O" : "X"));
     setAiTurn(true);
   }
@@ -42,7 +54,7 @@ export default function Game(props) {
 
   useEffect(() => {
     if (aiTurn) {
-      aiMove(game, setTurn);
+      aiMove(game, setTurn, botLevel, aiX_O);
       setAiTurn(false);
     }
   }, [aiTurn]);
@@ -54,6 +66,7 @@ export default function Game(props) {
     setWin([false, ""]);
     setTie(false);
     setWinningBoxes([]);
+    setAiTurn(aiX_O == "X" ? true : false);
   }
 
   //render value in each box
@@ -61,7 +74,7 @@ export default function Game(props) {
     <div
       className={winningBoxes.includes(ele.id) ? "box winning-box" : "box"}
       onClick={() => {
-        if (!win[0] && !tie && ele.value === "") {
+        if (turn !== aiX_O && !win[0] && !tie && ele.value === "") {
           handleBoxClick(ele.id);
         }
       }}
@@ -90,7 +103,18 @@ export default function Game(props) {
         >
           <img className="restart-logo" src={exit} alt="" />
         </button>
+
+        <button
+          className="exit-btn"
+          onClick={() => {
+            setShowPopUp((prev) => !prev);
+          }}
+        >
+          <img src={setting} className="restart-logo" alt="" />
+        </button>
+        <h1>{botLevel}</h1>
       </div>
+      <BotGamePopUp trigger={showPopUp} setShowPopUp={setShowPopUp} setBotLevel={setBotLevel} restartGame={restartGame} botLevel={botLevel} aiX_O={aiX_O} setAiX_O={setAiX_O} setAiTurn={setAiTurn} />
     </div>
   );
 }

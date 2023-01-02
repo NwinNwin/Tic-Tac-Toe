@@ -599,3 +599,136 @@ body {
     height: 5vw;
   }
 }
+
+/* BOT GAME */
+.bot-game-pop-up {
+  height: 70%;
+  width: 40%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border-radius: 4vw;
+  background: linear-gradient(145deg, #fda8a8, #d48d8d);
+  box-shadow: 32px 32px 64px #b87a7a, -32px -32px 64px #ffc0c0;
+  color: white;
+  font-family: "inter";
+  font-size: 1.5rem;
+  padding: 1%;
+}
+
+.bot-mode img {
+  width: 3vw;
+  height: 3vw;
+}
+
+.bot-mode-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 30%;
+}
+
+.bot-game-pop-up h1 {
+  margin: 2%;
+}
+
+.bot-game-pop-up h2 {
+  color: rgb(251, 251, 251);
+
+  margin: 2%;
+}
+.bot-mode h1 {
+  color: white;
+  font-family: "inter";
+  margin: 2% 0;
+  font-size: 1.5rem;
+}
+
+.bot-mode {
+  width: 20%;
+  height: 6vw;
+  padding: 1%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 3rem;
+  background: linear-gradient(145deg, #ff8b8b, #db7575);
+  box-shadow: 5px 5px 10px #ca6c6c, -5px -5px 10px #ff9898;
+}
+
+.bot-chosen {
+  border: white solid 10px;
+}
+
+.bot-mode:hover {
+  background: linear-gradient(145deg, #ff8b8b, #a45555);
+}
+
+.bot-mode:active {
+  transform: translateY(4px);
+}
+
+.bot-game-x-or-o img {
+  width: 3vw;
+  height: 3vw;
+}
+
+.bot-game-x-or-o div {
+  width: 5vw;
+  height: 5vw;
+  padding: 1%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 3rem;
+  margin: 0 3%;
+  background: linear-gradient(145deg, #ff8b8b, #db7575);
+  box-shadow: 5px 5px 10px #ca6c6c, -5px -5px 10px #ff9898;
+}
+
+.bot-game-x-or-o {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.bot-game-x-or-o div:active {
+  transform: translateY(4px);
+}
+
+.bot-game-x-or-o div:hover {
+  background: linear-gradient(145deg, #ff8b8b, #a45555);
+}
+
+.bot-close-btn {
+  color: white;
+  width: 4vw;
+  height: 4wv;
+  margin: 6%;
+  border: none;
+  border-radius: 0.7vw;
+  padding: 1%;
+  font-size: 16px;
+  background: linear-gradient(145deg, #ff8b8b, #db7575);
+  box-shadow: 5px 5px 10px #ca6c6c, -5px -5px 10px #ff9898;
+  cursor: pointer;
+}
+
+.bot-close-btn p {
+  margin: 0;
+}
+
+.bot-close-btn:active {
+  transform: translateY(4px);
+}
+
+.bot-close-btn:hover {
+  background: linear-gradient(145deg, #ff8b8b, #a45555);
+}
