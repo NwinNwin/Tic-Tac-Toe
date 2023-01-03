@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #fbbcbc;
+  user-select: none;
 }
 
 .board {
@@ -612,6 +613,42 @@ body {
   height: 5vw;
 }
 
+/* OFFLINE SCORE */
+.offline-score {
+  width: 10vw;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+}
+
+.offline-score div {
+  background: linear-gradient(145deg, #ff7a7a, #d66767);
+  box-shadow: 2px 2px 4px #e06b6b, -2px -2px 4px #fc7979;
+  width: 20px;
+  height: 1vw;
+  width: 1vw;
+  margin: 0 7%;
+  padding: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.offline-score div p {
+  margin: 0;
+  user-select: none;
+}
+
+.offline-score div:hover {
+  background: linear-gradient(145deg, #ff7a7a, #975353);
+  cursor: pointer;
+}
+
+.offline-score div:active {
+  transform: translateY(2px);
+}
+
 /* mobile styling */
 @media (max-width: 900px) {
   body {
@@ -867,5 +904,18 @@ body {
     width: 20vw;
     height: 10vw;
     border-radius: 3vw;
+  }
+
+  .offline-score div {
+    width: 4vw;
+    height: 3vw;
+    width: 1vw;
+    margin: 0 20%;
+    padding: 4%;
+  }
+
+  .offline-score div p {
+    margin: 0;
+    font-size: 0.6rem;
   }
 }

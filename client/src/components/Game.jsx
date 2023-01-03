@@ -23,6 +23,10 @@ export default function Game(props) {
   const [tie, setTie] = useState(false);
   const [winningBoxes, setWinningBoxes] = useState([]);
 
+  //score keeping
+  const [playerOneScore, setPlayerOneScore] = useState(0);
+  const [playerTwoScore, setPlayerTwoScore] = useState(0);
+
   useEffect(() => {
     let winning = checkWin(game);
     setWin(winning[0]);
@@ -71,6 +75,49 @@ export default function Game(props) {
       <button onClick={restartGame} className="restart-btn">
         <img className="restart-logo" src={restart} alt="" />
       </button>
+
+      {/* Score Bar */}
+      <div className="score-bar">
+        <h1 className="score-player">Player 1</h1>
+
+        <div className="offline-score">
+          <div
+            onClick={() => {
+              setPlayerOneScore(playerOneScore - 1);
+            }}
+          >
+            <p>-</p>
+          </div>
+          <h2 className="score-number">{playerOneScore}</h2>
+          <div
+            onClick={() => {
+              setPlayerOneScore(playerOneScore + 1);
+            }}
+          >
+            <p>+</p>
+          </div>
+        </div>
+        <div className="score-line"></div>
+
+        <div className="offline-score">
+          <div
+            onClick={() => {
+              setPlayerTwoScore(playerTwoScore - 1);
+            }}
+          >
+            <p>-</p>
+          </div>
+          <h2 className="score-number">{playerTwoScore}</h2>
+          <div
+            onClick={() => {
+              setPlayerTwoScore(playerTwoScore + 1);
+            }}
+          >
+            <p>+</p>
+          </div>
+        </div>
+        <h1 className="score-player">Player 2</h1>
+      </div>
       <div className="tool-bar">
         <button
           className="exit-btn"

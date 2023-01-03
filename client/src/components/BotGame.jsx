@@ -108,7 +108,7 @@ export default function Game(props) {
   return (
     <div className="game-container">
       <div className="result-container">
-        <h1>{win[0] && `${win[1]} WINS!`}</h1>
+        <h1>{win[0] && `${win[1] === aiX_O ? "AI" : "YOU"} WINS!`}</h1>
         <h1>{tie && !win[0] ? "TIE" : ""}</h1>
       </div>
 
