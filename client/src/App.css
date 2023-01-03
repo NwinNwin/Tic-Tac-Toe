@@ -151,16 +151,27 @@ body {
 
 .home-btn {
   text-align: center;
-  width: 7vw;
-  height: 7wv;
+  width: 10vw;
+  height: 10vw;
   margin: 7px;
+  padding: 0.5%;
   border: none;
   border-radius: 0.7vw;
-  padding: 1%;
   background: linear-gradient(145deg, #ff8b8b, #db7575);
   box-shadow: 5px 5px 10px #ca6c6c, -5px -5px 10px #ff9898;
   cursor: pointer;
   margin: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.home-btn h3 {
+  color: white;
+  font-family: "Concert One", cursive;
+  margin: 5% 0;
+  font-size: 1.2rem;
 }
 
 .home-btn:hover {
@@ -169,7 +180,7 @@ body {
 }
 
 .home {
-  height: 50vh;
+  height: 30vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -649,8 +660,22 @@ body {
   transform: translateY(2px);
 }
 
+/* Title Home */
+
+.title {
+  text-align: center;
+}
+
+.title-1 {
+  font-family: "Monoton";
+  font-weight: 400;
+  font-size: 6rem;
+  color: white;
+  margin-bottom: 0;
+}
+
 /* mobile styling */
-@media (max-width: 900px) {
+@media (max-width: 1060px) {
   body {
     margin-top: 37%;
   }
@@ -917,5 +942,36 @@ body {
   .offline-score div p {
     margin: 0;
     font-size: 0.6rem;
+  }
+
+  .home {
+    height: 20vh;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .title-1 {
+    font-family: "Monoton";
+    font-weight: 400;
+    font-size: 2.3rem;
+    color: white;
+    margin-bottom: 0;
+  }
+
+  .home-btn {
+    text-align: center;
+    width: 20vw;
+    height: 20vw;
+    padding: 1%;
+    border-radius: 4vw;
+  }
+
+  .home-btn h3 {
+    color: white;
+    font-family: "Concert One", cursive;
+    margin: 5% 0;
+    font-size: 0.8rem;
   }
 }
