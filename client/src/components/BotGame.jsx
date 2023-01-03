@@ -7,6 +7,10 @@ import restart from "../images/restart.svg";
 import exit from "../images/exit.svg";
 import BotGamePopUp from "./BotGamePopUp";
 import setting from "../images/setting.svg";
+import easy from "../images/easy.svg";
+import hard from "../images/hard.svg";
+import impossible from "../images/impossible.svg";
+import robot from "../images/robot.svg";
 
 export default function Game(props) {
   const [game, setGame] = useState([
@@ -36,6 +40,13 @@ export default function Game(props) {
   // 1: easy, 4: hard, 100:impossible
   const [botLevel, setBotLevel] = useState(100);
 
+  //keep track of number of moves
+  const [numMove, setnumMove] = useState(0);
+
+  //score keeping
+  const [yourScore, setYourScore] = useState(0);
+  const [aiScore, setAiScore] = useState(0);
+
   useEffect(() => {
     let winning = checkWin(game);
     setWin(winning[0]);
@@ -48,16 +59,25 @@ export default function Game(props) {
     setGame((prev) => prev.map((box) => (box.id === id && box.value === "" ? { ...box, value: turn } : box)));
     setTurn((prev) => (prev === "X" ? "O" : "X"));
     setAiTurn(true);
+    setnumMove(numMove + 1);
   }
 
   //Ai moves when its turn
-
   useEffect(() => {
     if (aiTurn) {
-      aiMove(game, setTurn, botLevel, aiX_O);
+      aiMove(game, setTurn, botLevel, aiX_O, numMove, setnumMove);
       setAiTurn(false);
     }
   }, [aiTurn]);
+
+  //update Score
+  useEffect(() => {
+    if (win[0] && win[1] !== aiX_O) {
+      setYourScore(yourScore + 1);
+    } else if (win[0] && win[1] === aiX_O) {
+      setAiScore(aiScore + 1);
+    }
+  }, [win[0]]);
 
   //restart game
   function restartGame() {
@@ -66,7 +86,8 @@ export default function Game(props) {
     setWin([false, ""]);
     setTie(false);
     setWinningBoxes([]);
-    setAiTurn(aiX_O == "X" ? true : false);
+    setAiTurn(aiX_O === "X" ? true : false);
+    setnumMove(0);
   }
 
   //render value in each box
@@ -82,6 +103,7 @@ export default function Game(props) {
       {ele.value === "O" ? <img className="x-or-o" src={o} alt="" width="100%" /> : ele.value === "X" ? <img className="x-or-o" src={x} width="70%" height="70%" /> : ele.value}
     </div>
   ));
+  console.log(numMove);
 
   return (
     <div className="game-container">
@@ -94,6 +116,16 @@ export default function Game(props) {
       <button onClick={restartGame} className="restart-btn">
         <img className="restart-logo" src={restart} alt="" />
       </button>
+
+      {/* Score Bar */}
+      <div className="score-bar">
+        <h1 className="score-player">You</h1>
+        <h2 className="score-number">{yourScore}</h2>
+        <div className="score-line"></div>
+        <h2 className="score-number">{aiScore}</h2>
+        <img className="bot-score-icon" src={robot} alt="" />
+      </div>
+
       <div className="tool-bar">
         <button
           className="exit-btn"
@@ -112,7 +144,14 @@ export default function Game(props) {
         >
           <img src={setting} className="restart-logo" alt="" />
         </button>
-        <h1>{botLevel}</h1>
+      </div>
+      <div className="bot-bar">
+        <img className="bot-icon" src={robot} alt="" />
+        <div className="bot-bar-line"> </div>
+
+        <img src={botLevel === 1 ? easy : botLevel === 4 ? hard : impossible} alt="" />
+        <h1>+</h1>
+        <img src={aiX_O === "X" ? x : o} alt="" />
       </div>
       <BotGamePopUp trigger={showPopUp} setShowPopUp={setShowPopUp} setBotLevel={setBotLevel} restartGame={restartGame} botLevel={botLevel} aiX_O={aiX_O} setAiX_O={setAiX_O} setAiTurn={setAiTurn} />
     </div>

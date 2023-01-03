@@ -1,28 +1,33 @@
 import { checkTie, checkWin } from "./utils";
 
 //AI Move
-function aiMove(game, setTurn, level, aiX_O) {
-  let bestScore = aiX_O === "O" ? Infinity : -Infinity;
-
+function aiMove(game, setTurn, level, aiX_O, numMove, setnumMove) {
   let bestMove;
-  for (let gameBox of game) {
-    if (gameBox.value === "") {
-      // game[gameBox.id] = { ...game[gameBox.id], value: "O" };
-      // let score = minimax(game, level, true);
 
-      game[gameBox.id] = { ...game[gameBox.id], value: aiX_O };
-      let score = minimax(game, level, aiX_O === "O" ? true : false);
-      game[gameBox.id] = { ...game[gameBox.id], value: "" };
-      if (aiX_O === "O" ? score < bestScore : score > bestScore) {
-        bestScore = score;
-        bestMove = gameBox.id;
+  if (aiX_O === "X" && numMove === 0) {
+    //make random first move when it is X
+    bestMove = Math.floor(Math.random() * 9);
+  } else {
+    let bestScore = aiX_O === "O" ? Infinity : -Infinity;
+    for (let gameBox of game) {
+      if (gameBox.value === "") {
+        // game[gameBox.id] = { ...game[gameBox.id], value: "O" };
+        // let score = minimax(game, level, true);
+
+        game[gameBox.id] = { ...game[gameBox.id], value: aiX_O };
+        let score = minimax(game, level, aiX_O === "O" ? true : false);
+        game[gameBox.id] = { ...game[gameBox.id], value: "" };
+        if (aiX_O === "O" ? score < bestScore : score > bestScore) {
+          bestScore = score;
+          bestMove = gameBox.id;
+        }
       }
     }
   }
 
   game[bestMove] = { ...game[bestMove], value: aiX_O };
-  console.log(aiX_O);
-  console.log(bestMove);
+
+  setnumMove(numMove + 1);
   setTurn((prev) => (prev === "X" ? "O" : "X"));
 }
 
