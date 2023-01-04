@@ -1,6 +1,5 @@
 import React from "react";
 import join from "../images/join.svg";
-import exit from "../images/exit.svg";
 
 export default function MultiplayerLogin(props) {
   return props.trigger ? (
