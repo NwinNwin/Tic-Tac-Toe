@@ -10,7 +10,7 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://tic-tac-toe-plus.vercel.app/",
+    origin: process.env.FRONTEND,
     method: ["GET", "POST"],
   },
 });
@@ -50,5 +50,5 @@ io.on("connection", (socket) => {
 });
 
 server.listen(process.env.PORT, () => {
-  console.log("SERVER RUNNING 3001");
+  console.log(`SERVER RUNNING ${process.env.PORT}`);
 });
