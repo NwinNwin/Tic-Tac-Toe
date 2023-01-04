@@ -2,6 +2,7 @@ import React from "react";
 import online from "../images/online.svg";
 import offline from "../images/offline.svg";
 import robot from "../images/robot.svg";
+import github from "../images/github.svg";
 
 export default function Home({ setMultiplayerPopUp, setOfflineGame, setBotGame }) {
   return (
@@ -47,6 +48,10 @@ export default function Home({ setMultiplayerPopUp, setOfflineGame, setBotGame }
           <h3>Offline</h3>
         </div>
       </div>
+      <a className="source-code" href="https://github.com/NwinNwin/Tic-Tac-Toe-PLUS">
+        <img className="home-btn-img" src={github} alt="" />
+        <h1>SOURCE CODE</h1>
+      </a>
     </>
   );
 }
