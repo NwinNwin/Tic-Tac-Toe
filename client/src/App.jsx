@@ -7,7 +7,7 @@ import io from "socket.io-client";
 import { useState } from "react";
 import BotGame from "./components/BotGame";
 
-const socket = io.connect("https://nwin-tic-tac-toe.onrender.com");
+const socket = io.connect("http://nwin-tic-tac-toe.onrender.com");
 
 function App() {
   const [username, setUsername] = useState("");
