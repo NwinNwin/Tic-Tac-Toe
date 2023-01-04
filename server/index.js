@@ -10,7 +10,7 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://tic-tac-toe-plus-client.vercel.app/",
+    origin: "https://tic-tac-toe-plus.vercel.app/",
     method: ["GET", "POST"],
   },
 });
@@ -49,6 +49,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(process.env.PORT || 3001, () => {
+server.listen(process.env.PORT, () => {
   console.log("SERVER RUNNING 3001");
 });
