@@ -39,6 +39,7 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
     setWin(winning[0]);
     setTie(checkTie(game, win));
     setWinningBoxes(winning[1]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [turn]);
 
   //when each box get clicked (set box to that value, switch turn)
@@ -68,6 +69,7 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
 
   useEffect(() => {
     sendGame();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sendingTurn]);
 
   //receive the game when opponent make move
@@ -80,6 +82,7 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
     };
     socket.on("receive_game", eventListener);
     return () => socket.off("receive_game", eventListener);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
 
   //change state when opponent left the room
@@ -89,6 +92,7 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
     };
     socket.on("user_left", eventListener);
     return () => socket.off("user_left", eventListener);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
 
   useEffect(() => {
@@ -98,6 +102,7 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
     };
     socket.on("user_joined", eventListener);
     return () => socket.off("user_joined", eventListener);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
 
   //keep score
@@ -107,6 +112,7 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
     } else if (win[0] && allowMove) {
       setOtherScore((prev) => prev + 1);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [win[0]]);
 
   //render value in each box
@@ -119,7 +125,7 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
         }
       }}
     >
-      {ele.value === "O" ? <img className="x-or-o" src={o} alt="" width="100%" /> : ele.value === "X" ? <img className="x-or-o" src={x} width="70%" height="70%" /> : ele.value}
+      {ele.value === "O" ? <img className="x-or-o" src={o} alt="alt" width="100%" /> : ele.value === "X" ? <img className="x-or-o" src={x} width="70%" height="70%" alt="alt" /> : ele.value}
     </div>
   ));
 
@@ -163,6 +169,7 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
               }}
               className="restart-logo"
               src={chat_logo}
+              alt="alt"
             />
           ) : (
             <img
@@ -171,6 +178,7 @@ export default function MultiplayerGame({ socket, username, room, setShowMultipl
               }}
               className="restart-logo"
               src={arrow_up}
+              alt="alt"
             />
           )}
         </button>

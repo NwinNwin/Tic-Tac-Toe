@@ -32,6 +32,7 @@ export default function Game(props) {
     setWin(winning[0]);
     setTie(checkTie(game, win));
     setWinningBoxes(winning[1]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [turn]);
 
   //when each box get clicked (set box to that value, switch turn)
@@ -59,7 +60,7 @@ export default function Game(props) {
         }
       }}
     >
-      {ele.value === "O" ? <img className="x-or-o" src={o} alt="" width="100%" /> : ele.value === "X" ? <img className="x-or-o" src={x} width="70%" height="70%" /> : ele.value}
+      {ele.value === "O" ? <img className="x-or-o" src={o} alt="alt" width="100%" /> : ele.value === "X" ? <img className="x-or-o" src={x} width="70%" height="70%" alt="alt" /> : ele.value}
     </div>
   ));
 

@@ -29,6 +29,7 @@ export default function Chat({ socket, username, room, userLeft }) {
     };
     socket.on("receive_message", eventListener);
     return () => socket.off("receive_message", eventListener);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
 
   return (

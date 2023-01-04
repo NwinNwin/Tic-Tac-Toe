@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { checkWin, checkTie } from "../utils";
 import { aiMove } from "../ai";
 import x from "../images/x.svg";
@@ -52,6 +52,7 @@ export default function Game(props) {
     setWin(winning[0]);
     setTie(checkTie(game, win));
     setWinningBoxes(winning[1]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [turn]);
 
   //when each box get clicked (set box to that value, switch turn)
@@ -68,6 +69,7 @@ export default function Game(props) {
       aiMove(game, setTurn, botLevel, aiX_O, numMove, setnumMove);
       setAiTurn(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [aiTurn]);
 
   //update Score
@@ -77,6 +79,7 @@ export default function Game(props) {
     } else if (win[0] && win[1] === aiX_O) {
       setAiScore(aiScore + 1);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [win[0]]);
 
   //restart game
@@ -100,7 +103,7 @@ export default function Game(props) {
         }
       }}
     >
-      {ele.value === "O" ? <img className="x-or-o" src={o} alt="" width="100%" /> : ele.value === "X" ? <img className="x-or-o" src={x} width="70%" height="70%" /> : ele.value}
+      {ele.value === "O" ? <img className="x-or-o" src={o} alt="alt" width="100%" /> : ele.value === "X" ? <img className="x-or-o" src={x} width="70%" height="70%" alt="alt" /> : ele.value}
     </div>
   ));
   console.log(numMove);
