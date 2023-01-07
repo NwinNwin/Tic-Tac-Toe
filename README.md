@@ -19,7 +19,7 @@ A fully responsive Tic-Tac-Toe web game that can be played on any device (deskto
 ### AI MODE:
 
 - The AI mode of the tic-tac-toe game utilizes a <ins>recursive decision-tree algorithm</ins> known as Minimax (can be found in client/src/ai.js) to make strategic choices during gameplay. This algorithm allows the computer to calculate the potential winning and losing possibilities for each of the remaining tic-tac-toe options on the board, and to choose the best possible move for each turn. 
-The difficulty level in the AI mode is determined by the <ins>number of steps ahead</ins> that the computer is able to consider when making its moves. For example, in easy mode, the AI is only able to think 1 step ahead, while in impossible mode, the AI is able to consider up to 100 steps ahead. This allows players to choose the level of challenge that best suits their skills, and to gradually increase the difficulty as they become more proficient at the game. 
+- The difficulty level in the AI mode is determined by the <ins>number of steps ahead</ins> that the computer is able to consider when making its moves. For example, in easy mode, the AI is only able to think 1 step ahead, while in impossible mode, the AI is able to consider up to 100 steps ahead. This allows players to choose the level of challenge that best suits their skills, and to gradually increase the difficulty as they become more proficient at the game. 
 
 ### MULTIPLAYER MODE:
 
