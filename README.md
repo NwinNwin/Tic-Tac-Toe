@@ -13,6 +13,9 @@ A fully responsive Tic-Tac-Toe web game that can be played on any device (deskto
 <img src="https://media.discordapp.net/attachments/688278789566103604/1061420896218259556/image.png?width=960&height=676" width="300px"/>
 </p>
 - The <ins>Offline mode</ins> is perfect for players who want to play with friends in the same physical location. The interactive scoreboard keeps track of scores between players, making it easy to keep track of who's winning.
+<p align="center">
+<img src="https://media.discordapp.net/attachments/688278789566103604/1061423292071825470/image.png?width=975&height=676" width="300px"/>
+</p>
 
 # How I Built It:
 
